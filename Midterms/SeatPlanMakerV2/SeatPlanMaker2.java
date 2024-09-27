@@ -66,7 +66,7 @@ public class SeatPlanMaker2 {
         generateSeats();
         display();
 
-        System.out.print("Selecte seat number to take <Enter 0 to quit>: ");
+        System.out.print("Select seat number to take <Enter 0 to quit>: ");
         reservedseat = s.nextInt();
 
         while (reservedseat != 0){
