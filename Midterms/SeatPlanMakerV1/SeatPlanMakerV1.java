@@ -2,7 +2,7 @@ package Midterms.SeatPlanMakerV1;
 
 import java.util.*;
 
-public class SeatPlanMaker {
+public class SeatPlanMakerV1 {
     static int r, rc, lc, seatcount = 1;
     static Scanner s = new Scanner(System.in);
 
@@ -12,7 +12,7 @@ public class SeatPlanMaker {
                 System.out.printf("[%02d]", seatcount);
                 seatcount++;
             }
-            System.out.print('\t');
+            System.out.print("    ");
             for (int l = 0; l < rc; l++) {
                 System.out.printf("[%02d]", seatcount);
                 seatcount++;

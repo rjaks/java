@@ -2,7 +2,7 @@ package Midterms.SeatPlanMakerV2;
 
 import java.util.*;
 
-public class SeatPlanMaker2 {
+public class SeatPlanMakerV2 {
     static int r, rc, lc, seatcount = 1, reservedseat;
     static int[][] seats;
     static boolean isReserved = false;
@@ -28,7 +28,7 @@ public class SeatPlanMaker2 {
                 if (seats[j][k] == 100) System.out.print("[XX]");
                 else System.out.printf("[%02d]", seats[j][k]);
             }
-            System.out.print('\t');
+            System.out.print("    ");
             for (int l = lc; l < rc + lc; l++) {
                 if (seats[j][l] == 100) System.out.print("[XX]");
                 else System.out.printf("[%02d]", seats[j][l]);
