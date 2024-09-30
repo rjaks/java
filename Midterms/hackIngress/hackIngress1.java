@@ -7,6 +7,11 @@ public class hackIngress1 {
     static int[] cycle;
     static boolean noFirst = true;
 
+    static void addcount(){
+        count++;
+        success++;
+    }
+
     static void solve(){
         int time = s.nextInt();
         int convertedtime =  ((time / 100) * 60) + (time % 100);
@@ -15,34 +20,29 @@ public class hackIngress1 {
             first = time % 100;
             cycle[0] = convertedtime;
             noFirst = false;
-            count++;
-            success++;
+            addcount();
+        }
+        else if (count > 0 && count < 4 && convertedtime - cycle[count-1] >= 5){
+            cycle[count] = convertedtime;
+            addcount();
         }
         else if (count > 0 && convertedtime - cycle[0] >= 240 + first){
             cycle = new int[4];
             cycle[0] = convertedtime;
             count = 0;
-            count++;
-            success++;
+            addcount();
         }
         else if (count > 0 && cycle[0] > 720 && convertedtime < 720 ){
             if ((1440 - cycle[count-1]) + convertedtime >= 5){
                 cycle[count] = convertedtime;
-                count++;
-                success++;
+                addcount();
             }
             else if ((1440 - cycle[count-1]) + convertedtime >= 240 + first){
                 cycle = new int[4];
                 cycle[0] = convertedtime;
                 count = 0;
-                count++;
-                success++;
+                addcount();
             }
-        }
-        else if (count > 0 && count < 4 && convertedtime - cycle[count-1] >= 5){
-            cycle[count] = convertedtime;
-            count++;
-            success++;
         }
     }
 
