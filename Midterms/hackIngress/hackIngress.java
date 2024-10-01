@@ -1,59 +1,89 @@
 package Midterms.hackIngress;
-import java.util.*;
+import java.util.Scanner;
 
-public class hackIngress{
+public class hackIngress {
     static Scanner s = new Scanner(System.in);
     static int count, success, first;
     static int[] cycle;
     static boolean noFirst = true;
 
-    static void solve(){
-        int time;
-        time = s.nextInt();
+    static void addcount(){
+        count++;
+        success++;
+    }
 
-        if (noFirst) { // constructs the beginning of the cycles
-            first = time % 60;
-            cycle[0] = time;
+    static void solve(){
+        int time = s.nextInt();
+        int convertedtime =  ((time / 100) * 60) + (time % 100);
+        
+        if (noFirst){
+            first = time % 100;
+            cycle[0] = convertedtime;
             System.out.print(time + " ");
             noFirst = false;
-            count++;
-            success++;
+            addcount();
+            return;
         }
-        else if (count > 0 && time >= cycle[0] + 400 + first){ // checks if the number inputted starts a new cycle
-            // ISSUE: logical error with syntax: difficulties with time resets
-            cycle = new int[4];
-            System.out.print(" | " + time + " ");
-            cycle[0] = time;
-            count = 0;
-            count++;
-            success++;
+        
+        if (count > 0){
+            if (count < 4){
+                if (convertedtime < cycle[0]){ 
+                    if ((1440 - cycle[count-1]) + convertedtime >= 240 + first){ // checks if the interval between the current time and first hack of the cycle is already past 4 hours
+                        cycle = new int[4];
+                        cycle[0] = convertedtime;
+                        count = 0;
+                        System.out.printf("| %d ", time);
+                        addcount();
+                    }
+                    else {
+                        cycle[count] = convertedtime;
+                        System.out.print(time + " ");
+                        addcount();
+                    }
+                }
+                else if (convertedtime <= cycle[count-1]){  // checks if current < previous
+                    if ( convertedtime < 720 && cycle[count-1] > 720){ // checks if current is AM and previous is PM
+                        if ((1440 - cycle[count-1]) + convertedtime >= 240 + first){  // resets if the interval between previous and current is already 4 hours
+                            cycle = new int[4];
+                            cycle[0] = convertedtime;
+                            count = 0;
+                            System.out.printf("| %d ", time);
+                            addcount();
+                        }
+                        else{
+                            cycle[count] = convertedtime;
+                            System.out.print(time + " ");
+                            addcount();
+                        }
+                    }
+                    else {
+                        cycle = new int[4];
+                        cycle[0] = convertedtime;
+                        count = 0;
+                        System.out.printf("| %d ", time);
+                        addcount();
+                    }
+                }
+                else if (convertedtime >= cycle[0] + 240 + first){ // resets the cycle if current is 4 hours ahead of the first hack in the cycle
+                    cycle = new int[4];
+                    cycle[0] = convertedtime;
+                    count = 0;
+                    System.out.printf("| %d ", time);
+                    addcount();
+                }
+                else if (convertedtime >= cycle[count-1] + 5){ // adds to the if current is 5 mins ahead of previous
+                    cycle[count] = convertedtime;
+                    System.out.print(time + " ");
+                    addcount();
+                }
         }
-        // 23 0600 0659 0700 0715 0719 0959 1000 1004 1030 1500 1505 1510 1512 1516 1521 1900 1831 1832 1948 2359 0000 0004 0430
-        // 16 600 659 715 719 | 959 1004 1030 | 1500 1505 1510 1516 | 1900 1948 | 2359 0004 | 0430
-        else if (count > 0 && cycle[0] > 1200 && time < 1200 ){
-            if ((2400 - cycle[count-1]) + time >= 5){
-                cycle[count] = time;
-                System.out.printf("(%d)", cycle[count-1]);
-                System.out.print(time + " ");
-                count++;
-                success++;
-            }
-            else if ((2400 - cycle[count-1]) + time >= 400 + first){
+            else if (convertedtime >= cycle[0] + 240 + first){ // resets the cycle if current is 4 hours ahead of the first hack in the cycle
                 cycle = new int[4];
-                cycle[0] = time;
-                System.out.print(" | " + time + " ");
+                cycle[0] = convertedtime;
                 count = 0;
-                count++;
-                success++;
+                System.out.printf("| %d ", time);
+                addcount();
             }
-        }
-        else if (count > 0 && count < 4 && time - cycle[count-1] >= 5){ // checks if the hack is successful or within the cycle
-            cycle[count] = time;
-            System.out.printf("(%d)", cycle[count-1]);
-            System.out.printf("[%d]", time - cycle[count-1]);
-            System.out.print(time + " ");
-            count++;
-            success++;
         }
     }
 
