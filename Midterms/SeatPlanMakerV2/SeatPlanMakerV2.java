@@ -68,11 +68,21 @@ public class SeatPlanMakerV2 {
 
         System.out.print("Select seat number to take <Enter 0 to quit>: ");
         reservedseat = s.nextInt();
+        while (reservedseat < 0 || reservedseat > 99){
+            System.out.println("Invalid seat number.\n");
+            System.out.print("Select seat number to take <Enter 0 to quit>: ");
+            reservedseat = s.nextInt();
+        }
 
         while (reservedseat != 0){
             reserve(reservedseat);
             System.out.print("Select seat number to take <Enter 0 to quit>: ");
             reservedseat = s.nextInt();
+            while (reservedseat < 0 || reservedseat > 99){
+                System.out.println("Invalid seat number.\n");
+                System.out.print("Select seat number to take <Enter 0 to quit>: ");
+                reservedseat = s.nextInt();
+            }
         } 
     }
 }
