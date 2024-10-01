@@ -1,8 +1,11 @@
 package Midterms.hackIngress;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class hackIngress {
-    static Scanner s = new Scanner(System.in);
+    static File input;
+    static PrintWriter out;
+    static Scanner s;
     static int count, success, first;
     static int[] cycle;
     static boolean noFirst = true;
@@ -87,8 +90,12 @@ public class hackIngress {
         }
     }
 
-    public static void main(String[] args){
-        while(true){
+    public static void main(String[] args) throws IOException {
+        input = new File("hackIngress.in");
+        out = new PrintWriter("hackIngress.out");
+        s = new Scanner(input);
+        
+        while(s.hasNext()){
             int n = s.nextInt();
             if ( n < 2 || n > 1000) System.exit(0);
             count = 0;
