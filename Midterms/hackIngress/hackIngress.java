@@ -22,7 +22,6 @@ public class hackIngress {
         if (noFirst){
             first = time % 100;
             cycle[0] = convertedtime;
-            System.out.print(time + " ");
             noFirst = false;
             addcount();
             return;
@@ -35,12 +34,10 @@ public class hackIngress {
                         cycle = new int[4];
                         cycle[0] = convertedtime;
                         count = 0;
-                        System.out.printf("| %d ", time);
                         addcount();
                     }
                     else {
                         cycle[count] = convertedtime;
-                        System.out.print(time + " ");
                         addcount();
                     }
                 }
@@ -50,12 +47,10 @@ public class hackIngress {
                             cycle = new int[4];
                             cycle[0] = convertedtime;
                             count = 0;
-                            System.out.printf("| %d ", time);
                             addcount();
                         }
                         else{
                             cycle[count] = convertedtime;
-                            System.out.print(time + " ");
                             addcount();
                         }
                     }
@@ -63,7 +58,6 @@ public class hackIngress {
                         cycle = new int[4];
                         cycle[0] = convertedtime;
                         count = 0;
-                        System.out.printf("| %d ", time);
                         addcount();
                     }
                 }
@@ -71,12 +65,10 @@ public class hackIngress {
                     cycle = new int[4];
                     cycle[0] = convertedtime;
                     count = 0;
-                    System.out.printf("| %d ", time);
                     addcount();
                 }
                 else if (convertedtime >= cycle[count-1] + 5){ // adds to the if current is 5 mins ahead of previous
                     cycle[count] = convertedtime;
-                    System.out.print(time + " ");
                     addcount();
                 }
         }
@@ -84,7 +76,6 @@ public class hackIngress {
                 cycle = new int[4];
                 cycle[0] = convertedtime;
                 count = 0;
-                System.out.printf("| %d ", time);
                 addcount();
             }
         }
@@ -94,7 +85,7 @@ public class hackIngress {
         input = new File("hackIngress.in");
         out = new PrintWriter("hackIngress.out");
         s = new Scanner(input);
-        
+
         while(s.hasNext()){
             int n = s.nextInt();
             if ( n < 2 || n > 1000) System.exit(0);
@@ -107,7 +98,8 @@ public class hackIngress {
             for (int i = 0; i < n; i++) {
                 solve();
             }
-            System.out.println(success);
+            out.println(success);
         }
+        out.close();
     }
 }
