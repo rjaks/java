@@ -4,10 +4,12 @@ import java.util.*;
 
 class Vehicle{
   private String brand, tires, model;
-  public Vehicle(){
-    brand = "";
-    tires = "";
-    model = "";
+
+  public Vehicle(){}
+  public Vehicle(String inpBrand, String inpTires, String inpModel){
+    brand = inpBrand;
+    tires = inpTires;
+    model = inpModel;
   }
   public void setBrand(String inpBrand){ brand = inpBrand; }
   public void setTires(String inpTires){ tires = inpTires; }
@@ -29,12 +31,10 @@ class Motorcycle extends Vehicle{
   private String[] engineTypes = {"Single Cylinder", "Parallel Twin", "Inline Triple", "V Twin", "Inline Four", "Inline Six",
     "Flat Four", "Flat Six", "L Twin", "Wrapping Up"};
   private String[] fuelSystems = {"Carburetor", "Fuel-injection"};
-  private String engineType, fuelSystem, brand, model, tires;
+  private String engineType, fuelSystem;
   
   public Motorcycle(String inpBrand, String inpTires, String inpModel, String inpEngineType, String inpFuelSystem) {
-    brand = inpBrand;
-    tires = inpTires;
-    model = inpModel;
+    super(inpBrand, inpTires, inpModel);
     engineType = inpEngineType;
     fuelSystem = inpFuelSystem;
   }
@@ -72,12 +72,10 @@ class Motorcycle extends Vehicle{
 };
 
 class Bicycle extends Vehicle {
-    private String chainType, shifter, brand, model, tires;
+    private String chainType, shifter;
 
     public Bicycle(String inpBrand, String inpModel, String inpTires, String inpChainType, String inpShifter){
-        brand = inpBrand;
-        model = inpModel;
-        tires = inpTires;
+        super(inpBrand, inpTires, inpModel);
         chainType = inpChainType;
         shifter = inpShifter;
     }
@@ -97,5 +95,8 @@ class Bicycle extends Vehicle {
 };
 
 public class myVehicle {
+    Motorcycle motor = new Motorcycle("Yamaha", "Tubeless", "Aerox S", "Inline Four", "Fuel Injection");
+    Bicycle bike = new Bicycle("Decathlon", "Rockrider ST100", "27.5 inches", "Derailieur", "Trigger Shifter");
+
     
 }
